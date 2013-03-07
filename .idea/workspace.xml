@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bb31709-9e93-402c-945c-a3734a97e2cf" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENCE.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CoalescingRingBuffer/CoalescingRingBuffer.iml" afterPath="$PROJECT_DIR$/CoalescingRingBuffer/CoalescingRingBuffer.iml" />
     </list>
     <ignored path="LMAXCollections.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,19 +94,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CoalescingBuffer.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CoalescingBuffer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/src/com/lmax/collections/coalescing/ring/buffer/CoalescingBuffer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="6" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.2675522">
+            <state line="18" column="21" selection-start="334" selection-end="334" vertical-scroll-proportion="0.6">
               <folding />
             </state>
           </provider>
@@ -576,7 +567,11 @@
       <created>1362691526819</created>
       <updated>1362691526819</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ignore build and dist folders">
+      <created>1362691658281</created>
+      <updated>1362691658281</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -642,7 +637,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="update workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="ignore build and dist folders" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -661,6 +656,7 @@
     <MESSAGE value="add iml file" />
     <MESSAGE value="update build script to automatically create the dist folder" />
     <MESSAGE value="update workspace.xml" />
+    <MESSAGE value="ignore build and dist folders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -736,16 +732,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/src/com/lmax/collections/coalescing/ring/buffer/CoalescingBuffer.java">
+    <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+        <state line="64" column="6" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.2675522">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/build.xml">
+    <entry file="file://$PROJECT_DIR$/LICENCE.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="6" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.2675522">
+        <state line="9" column="13" selection-start="328" selection-end="331" vertical-scroll-proportion="0.25882354">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/src/com/lmax/collections/coalescing/ring/buffer/CoalescingBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="21" selection-start="334" selection-end="334" vertical-scroll-proportion="0.6">
           <folding />
         </state>
       </provider>
