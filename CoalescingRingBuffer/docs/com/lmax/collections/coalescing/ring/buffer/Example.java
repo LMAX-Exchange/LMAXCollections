@@ -22,16 +22,16 @@ public class Example {
         }
     }
 
-	public class Producer extends Thread {
+    public class Producer extends Thread {
         private final List<String> stockSymbols = asList("FB", "RHT", "AAPL");
         private final Random random = new Random();
 
-		public Producer() {
-			super("producer");
-		}
+        public Producer() {
+            super("producer");
+        }
 
-		@Override
-		public void run() {
+        @Override
+        public void run() {
             while (true) {
                 for (String symbol : stockSymbols) {
                     StockPrice price = new StockPrice(symbol, 100 * random.nextDouble());
@@ -42,17 +42,17 @@ public class Example {
                     }
                 }
             }
-		}
+        }
     }
 
-	public class Consumer extends Thread {
+    public class Consumer extends Thread {
 
-		public Consumer() {
-			super("consumer");
-		}
+        public Consumer() {
+            super("consumer");
+        }
 
-		@Override
-		public void run() {
+        @Override
+        public void run() {
             List<StockPrice> prices = new ArrayList<StockPrice>(3);
 
             while (true) {
@@ -62,26 +62,26 @@ public class Example {
                 }
                 prices.clear();
             }
-		}
-	}
+        }
+    }
 
-	public Example(CoalescingRingBuffer<String, StockPrice> buffer) {
-		this.buffer = buffer;
-	}
+    public Example(CoalescingRingBuffer<String, StockPrice> buffer) {
+        this.buffer = buffer;
+    }
 
     private final CoalescingRingBuffer<String, StockPrice> buffer;
 
-	public void run() throws InterruptedException {
-		Producer producer = new Producer();
-		Consumer consumer = new Consumer();
+    public void run() throws InterruptedException {
+        Producer producer = new Producer();
+        Consumer consumer = new Consumer();
 
-		producer.start();
-		consumer.start();
+        producer.start();
+        consumer.start();
 
-		consumer.join();
-	}
+        consumer.join();
+    }
 
-	public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         CoalescingRingBuffer<String, StockPrice> buffer = new CoalescingRingBuffer<String, StockPrice>(8);
 
         // register an mbean to be able to view the state of the coalescing ring buffer
@@ -89,6 +89,6 @@ public class Example {
 
         Example example = new Example(buffer);
         example.run();
-	}
+    }
 
 }
