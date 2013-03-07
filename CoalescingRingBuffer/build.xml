@@ -1,9 +1,10 @@
-<project basedir="." default="report.test.failures" name="CoalescingRingBuffer">
+<project basedir="." default="dist" name="CoalescingRingBuffer">
 
     <property file="build.properties"/>
 
     <target name="clean">
         <delete dir="build"/>
+        <delete dir="dist"/>
     </target>
 
     <target name="compile" depends="clean">
@@ -61,6 +62,13 @@
             <report todir="build/testResults"/>
         </junitreport>
         <fail message="junit says no, see build/testResults/index.html"/>
+    </target>
+
+    <target name="dist" depends="report.test.failures">
+        <mkdir dir="dist"/>
+        <copy todir="dist">
+            <fileset dir="build/jar"/>
+        </copy>
     </target>
 
     <target name="run.performance.test" depends="compile.tests">
