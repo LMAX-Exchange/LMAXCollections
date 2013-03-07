@@ -1,0 +1,7 @@
+<project default="test-everything" name="LmaxCollections">
+
+    <target name="test-everything">
+        <ant antfile="build.xml" dir="CoalescingRingBuffer"/>
+    </target>
+
+</project>

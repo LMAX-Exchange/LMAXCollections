@@ -1,0 +1,73 @@
+<project basedir="." default="report.test.failures" name="CoalescingRingBuffer">
+
+    <property file="build.properties"/>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac debug="on" destdir="build/classes" includeantruntime="false" srcdir="src"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar basedir="build/classes" destfile="build/jar/coalescingRingBuffer-${version}.jar"/>
+        <zip destfile="build/jar/coalescingRingBuffer-${version}-src.zip" basedir="." excludes="build/**"/>
+    </target>
+
+    <path id="automated.test.classpath">
+        <path location="lib/junit-4.10.jar"/>
+        <fileset dir="." includes="build/jar/*.jar"/>
+    </path>
+
+    <target name="compile.automated.tests" depends="jar">
+        <mkdir dir="build/test/automated"/>
+        <javac classpathref="automated.test.classpath" debug="on" destdir="build/test/automated" includeantruntime="false" srcdir="test/automated"/>
+    </target>
+
+    <path id="manual.test.classpath">
+        <path location="build/test/automated"/>
+        <fileset dir="." includes="build/jar/*.jar"/>
+    </path>
+
+    <target name="compile.manual.tests" depends="jar">
+        <mkdir dir="build/test/manual"/>
+        <javac classpathref="manual.test.classpath" debug="on" destdir="build/test/manual" includeantruntime="false" srcdir="test/manual"/>
+    </target>
+
+    <target name="compile.tests" depends="compile.automated.tests, compile.manual.tests"/>
+
+    <target name="run.automated.tests" depends="compile.tests">
+        <mkdir dir="build/testResults"/>
+        <junit failureproperty="junitFailure" printsummary="yes">
+            <formatter type="xml"/>
+            <classpath>
+                <path refid="automated.test.classpath"/>
+                <path location="build/test/automated"/>
+            </classpath>
+            <batchtest fork="yes" todir="build/testResults">
+                <fileset dir="test/automated" includes="**/*Test.java"/>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="report.test.failures" depends="run.automated.tests" if="junitFailure">
+        <junitreport todir="build/testResults">
+            <fileset dir="build/testResults">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="build/testResults"/>
+        </junitreport>
+        <fail message="junit says no, see build/testResults/index.html"/>
+    </target>
+
+    <target name="run.performance.test" depends="compile.tests">
+        <exec command="sudo cpufreq-set -c 0 -f 1700000"/>
+        <exec command="sudo cpufreq-set -c 1 -f 1700000"/>
+        <exec command="sudo cpufreq-set -c 2 -f 1700000"/>
+        <exec command="sudo cpufreq-set -c 3 -f 1700000"/>
+        <exec command="sudo nice -n -20 taskset -c 1,3 java -XX:+PrintCompilation -XX:+PrintGC -server -XX:CompileThreshold=100000 -Xms1g -Xmx1g -cp build/test/automated/:build/test/manual/:build/jar/* com.lmax.collections.coalescing.ring.buffer.performance.PerformanceTest"/>
+    </target>
+</project>
