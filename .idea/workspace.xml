@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6bb31709-9e93-402c-945c-a3734a97e2cf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CoalescingRingBuffer/CoalescingRingBuffer.iml" afterPath="$PROJECT_DIR$/CoalescingRingBuffer/CoalescingRingBuffer.iml" />
     </list>
     <ignored path="LMAXCollections.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -105,7 +106,7 @@
       <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="13" selection-start="2755" selection-end="2755" vertical-scroll-proportion="0.5066414">
+            <state line="64" column="6" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.2675522">
               <folding />
             </state>
           </provider>
@@ -571,7 +572,11 @@
       <created>1362690818040</created>
       <updated>1362690818040</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update workspace.xml">
+      <created>1362691526819</created>
+      <updated>1362691526819</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -637,7 +642,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="update build script to automatically create the dist folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="update workspace.xml" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -655,6 +660,7 @@
     <MESSAGE value="fix example formatting" />
     <MESSAGE value="add iml file" />
     <MESSAGE value="update build script to automatically create the dist folder" />
+    <MESSAGE value="update workspace.xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -739,7 +745,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="13" selection-start="2755" selection-end="2755" vertical-scroll-proportion="0.5066414">
+        <state line="64" column="6" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.2675522">
           <folding />
         </state>
       </provider>
@@ -796,7 +802,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>LMAXCollections</last-edited>
+          <last-edited>CoalescingRingBuffer</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
