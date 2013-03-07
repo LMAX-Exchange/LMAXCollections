@@ -9,6 +9,11 @@ Maintainer
 Coalescing Ring Buffer:
 [Nick Zeeb] (https://github.com/nickzeeb)
 
+What is it?
+==========
+
+Please see http://nickzeeb.wordpress.com/2013/03/07/the-coalescing-ring-buffer/ for an introduction
+
 Changelog
 ==========
 
