@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bb31709-9e93-402c-945c-a3734a97e2cf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENCE.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="LMAXCollections.iws" />
@@ -94,10 +93,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CoalescingBuffer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CoalescingBuffer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/src/com/lmax/collections/coalescing/ring/buffer/CoalescingBuffer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="21" selection-start="334" selection-end="334" vertical-scroll-proportion="0.6">
+            <state line="18" column="21" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="0" selection-start="398" selection-end="398" vertical-scroll-proportion="0.8164948">
               <folding />
             </state>
           </provider>
@@ -116,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/CoalescingRingBuffer/scripts/runPerformanceTest.sh" />
         <option value="$PROJECT_DIR$/CoalescingRingBuffer/runPerformanceTest.sh" />
         <option value="$PROJECT_DIR$/CoalescingRingBuffer/test/manual/com/lmax/collections/coalescing/ring/buffer/performance/StopWatch.java" />
         <option value="$PROJECT_DIR$/CoalescingRingBuffer/test/manual/com/lmax/collections/coalescing/ring/buffer/performance/Producer.java" />
@@ -132,6 +139,7 @@
         <option value="$PROJECT_DIR$/Example/src/Test.java" />
         <option value="$PROJECT_DIR$/CoalescingRingBuffer/docs/com/lmax/collections/coalescing/ring/buffer/Example.java" />
         <option value="$PROJECT_DIR$/CoalescingRingBuffer/build.xml" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -571,14 +579,22 @@
       <created>1362691658281</created>
       <updated>1362691658281</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add license">
+      <created>1362691864046</created>
+      <updated>1362691864046</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add link to blog post introduction">
+      <created>1362692268550</created>
+      <updated>1362692268550</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="-4" width="1553" height="905" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24933687" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32228118" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -592,7 +608,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.249501" sideWeight="0.7506631" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.249501" sideWeight="0.6777188" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2917772" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -637,7 +653,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="ignore build and dist folders" />
+    <option name="LAST_COMMIT_MESSAGE" value="add link to blog post introduction" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -657,6 +673,8 @@
     <MESSAGE value="update build script to automatically create the dist folder" />
     <MESSAGE value="update workspace.xml" />
     <MESSAGE value="ignore build and dist folders" />
+    <MESSAGE value="add license" />
+    <MESSAGE value="add link to blog post introduction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -748,7 +766,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CoalescingRingBuffer/src/com/lmax/collections/coalescing/ring/buffer/CoalescingBuffer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="21" selection-start="334" selection-end="334" vertical-scroll-proportion="0.6">
+        <state line="18" column="21" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="398" selection-end="398" vertical-scroll-proportion="0.8164948">
           <folding />
         </state>
       </provider>
