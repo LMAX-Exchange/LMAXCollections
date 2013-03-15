@@ -1,10 +1,9 @@
-<project basedir="." default="dist" name="CoalescingRingBuffer">
+<project basedir="." default="report.test.failures" name="CoalescingRingBuffer">
 
     <property file="build.properties"/>
 
     <target name="clean">
         <delete dir="build"/>
-        <delete dir="dist"/>
     </target>
 
     <target name="compile" depends="clean">
@@ -65,6 +64,7 @@
     </target>
 
     <target name="dist" depends="report.test.failures">
+        <delete dir="dist"/>
         <mkdir dir="dist"/>
         <copy todir="dist">
             <fileset dir="build/jar"/>
