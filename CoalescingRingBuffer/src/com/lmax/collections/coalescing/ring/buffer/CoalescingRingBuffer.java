@@ -9,7 +9,7 @@ import static java.lang.Math.min;
 public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> {
 
     private volatile long nextWrite = 1; // the next write index
-    private volatile long lastCleaned = 0; // the last index that was nulled out by the producer
+    private long lastCleaned = 0; // the last index that was nulled out by the producer
     private volatile long rejectionCount = 0;
     private final K[] keys;
     private final AtomicReferenceArray<V> values;
@@ -107,19 +107,16 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     private void cleanUp() {
         long lastRead = this.lastRead;
-        long lastCleaned = this.lastCleaned;
 
         if (lastRead == lastCleaned) {
             return;
         }
 
-        for (long nextClean = lastCleaned + 1; nextClean <= lastRead; nextClean++) {
-            int index = mask(nextClean);
+        while (lastCleaned < lastRead) {
+            int index = mask(++lastCleaned);
             keys[index] = null;
-            values.set(index, null);
+            values.lazySet(index, null);
         }
-
-        this.lastCleaned = lastRead;
     }
 
     private void store(K key, V value) {
