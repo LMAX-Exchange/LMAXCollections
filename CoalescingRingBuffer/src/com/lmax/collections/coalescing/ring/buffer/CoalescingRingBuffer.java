@@ -1,6 +1,7 @@
 package com.lmax.collections.coalescing.ring.buffer;
 
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import static java.lang.Math.min;
@@ -19,7 +20,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     private final int capacity;
 
     private volatile long nextRead = 1; // the oldest slot that is is safe to write to
-    private volatile long lastRead = 0; // the newest slot that it is safe to overwrite
+    private final AtomicLong lastRead = new AtomicLong(0); // the newest slot that it is safe to overwrite
 
     public CoalescingRingBuffer(int capacity) {
         checkIsPowerOfTwo(capacity);
@@ -38,7 +39,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @Override
     public int size() {
-        return (int) (nextWrite - lastRead - 1);
+        return (int) (nextWrite - lastRead.get() - 1);
     }
 
     @Override
@@ -106,7 +107,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     }
 
     private void cleanUp() {
-        long lastRead = this.lastRead;
+        long lastRead = this.lastRead.get();
 
         if (lastRead == lastCleaned) {
             return;
@@ -147,7 +148,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     private int fill(Collection<? super V> bucket) {
         long nextRead = this.nextRead;
-        long lastRead = this.lastRead;
+        long lastRead = this.lastRead.get();
 
         for (long readIndex = lastRead + 1; readIndex < nextRead; readIndex++) {
             int index = mask(readIndex);
@@ -155,7 +156,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
         }
 
         int readCount = (int) (nextRead - lastRead - 1);
-        this.lastRead = nextRead - 1;
+        this.lastRead.lazySet(nextRead - 1);
         return readCount;
     }
 
