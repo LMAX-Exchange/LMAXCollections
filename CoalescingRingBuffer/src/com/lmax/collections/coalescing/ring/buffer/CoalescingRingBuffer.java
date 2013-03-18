@@ -11,7 +11,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     private volatile long nextWrite = 1; // the next write index
     private long lastCleaned = 0; // the last index that was nulled out by the producer
-    private volatile long rejectionCount = 0;
+    private final AtomicLong rejectionCount = new AtomicLong(0);
     private final K[] keys;
     private final AtomicReferenceArray<V> values;
 
@@ -48,7 +48,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     }
 
     public long rejectionCount() {
-        return rejectionCount;
+        return rejectionCount.get();
     }
 
     public long nextWrite() {
@@ -97,7 +97,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     private boolean add(K key, V value) {
         if (isFull()) {
-            rejectionCount++;
+            rejectionCount.lazySet(rejectionCount.get() + 1);
             return false;
         }
 
