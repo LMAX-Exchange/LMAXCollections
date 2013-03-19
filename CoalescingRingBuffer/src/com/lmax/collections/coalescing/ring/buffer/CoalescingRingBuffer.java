@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import static java.lang.Math.min;
 
-@SuppressWarnings("unchecked")
 public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> {
 
     private volatile long nextWrite = 1; // the next write index
@@ -15,6 +14,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     private final K[] keys;
     private final AtomicReferenceArray<V> values;
 
+    @SuppressWarnings("unchecked")
     private final K nonCollapsibleKey = (K) new Object();
     private final int mask;
     private final int capacity;
@@ -22,6 +22,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     private volatile long nextRead = 1; // the oldest slot that is is safe to write to
     private final AtomicLong lastRead = new AtomicLong(0); // the newest slot that it is safe to overwrite
 
+    @SuppressWarnings("unchecked")
     public CoalescingRingBuffer(int capacity) {
         checkIsPowerOfTwo(capacity);
         this.mask = capacity - 1;
