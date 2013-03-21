@@ -38,18 +38,16 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @SuppressWarnings("unchecked")
     public CoalescingRingBuffer(int capacity) {
-        checkIsPowerOfTwo(capacity);
-        this.mask = capacity - 1;
-        this.capacity = capacity;
+        this.capacity = nextPowerOfTwo(capacity);
+        this.mask = this.capacity - 1;
 
-        this.keys = (K[]) new Object[capacity];
-        this.values = new AtomicReferenceArray<V>(capacity);
+
+        this.keys = (K[]) new Object[this.capacity];
+        this.values = new AtomicReferenceArray<V>(this.capacity);
     }
 
-    private void checkIsPowerOfTwo(int capacity) {
-        if (Integer.bitCount(capacity) != 1) {
-            throw new IllegalArgumentException("capacity (" + capacity + ") must be a power of two");
-        }
+    private int nextPowerOfTwo(int value) {
+        return 1 << (32 - Integer.numberOfLeadingZeros(value - 1));
     }
 
     @Override

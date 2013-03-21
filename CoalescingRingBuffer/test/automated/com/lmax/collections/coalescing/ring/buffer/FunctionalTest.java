@@ -34,11 +34,27 @@ public class FunctionalTest {
 
     @Before
     public void beforeEveryTest() {
-        buffer = createBuffer(16);
+        buffer = createBuffer(10);
     }
 
     public CoalescingBuffer<Long, MarketSnapshot> createBuffer(int capacity) {
         return new CoalescingRingBuffer<Long, MarketSnapshot>(capacity);
+    }
+
+    @Test
+    public void shouldCorrectlyIncreaseTheCapacityToTheNextHigherPowerOfTwo() {
+        checkCapacity(1024, createBuffer(1023));
+        checkCapacity(1024, createBuffer(1024));
+        checkCapacity(2048, createBuffer(1025));
+    }
+
+    private void checkCapacity(int capacity, CoalescingBuffer<Long, MarketSnapshot> buffer) {
+        assertEquals(capacity, buffer.capacity());
+
+        for (int i = 0; i < capacity; i++) {
+            boolean success = buffer.offer(createMarketSnapshot(i, i, i));
+            assertTrue(success);
+        }
     }
 
     @Test
