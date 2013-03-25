@@ -145,32 +145,26 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @Override
     public int poll(Collection<? super V> bucket) {
-        claimUpTo(nextWrite);
-        return fill(bucket);
+        return fill(bucket, nextWrite);
     }
 
     @Override
     public int poll(Collection<? super V> bucket, int maxItems) {
-        claimUpTo(min(nextRead + maxItems, nextWrite));
-        return fill(bucket);
+        long claimUpTo = min(nextRead + maxItems, nextWrite);
+        return fill(bucket, claimUpTo);
     }
 
-    private void claimUpTo(long claimIndex) {
-        nextRead = claimIndex;
-    }
-
-    private int fill(Collection<? super V> bucket) {
-        long nextRead = this.nextRead;
+    private int fill(Collection<? super V> bucket, long claimUpTo) {
+        nextRead = claimUpTo;
         long lastRead = this.lastRead.get();
 
-        for (long readIndex = lastRead + 1; readIndex < nextRead; readIndex++) {
+        for (long readIndex = lastRead + 1; readIndex < claimUpTo; readIndex++) {
             int index = mask(readIndex);
             bucket.add(values.get(index));
         }
 
-        int readCount = (int) (nextRead - lastRead - 1);
-        this.lastRead.lazySet(nextRead - 1);
-        return readCount;
+        this.lastRead.lazySet(claimUpTo - 1);
+        return (int) (claimUpTo - lastRead - 1);
     }
 
     private int mask(long value) {
