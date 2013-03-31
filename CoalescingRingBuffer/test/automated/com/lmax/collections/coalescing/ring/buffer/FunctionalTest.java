@@ -108,7 +108,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void shouldAcceptNewCollapsibleValueWhenFull() {
+    public void shouldAcceptUpdatedCollapsibleValueWhenFull() {
         buffer = createBuffer(2);
         buffer.offer(1L, BP_SNAPSHOT);
         buffer.offer(2L, BP_SNAPSHOT);
