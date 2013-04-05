@@ -88,7 +88,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void shouldRejectNonCollapsibleValueWhenFull() {
+    public void shouldRejectValuesWithoutKeysWhenFull() {
         buffer = createBuffer(2);
         buffer.offer(BP_SNAPSHOT);
         buffer.offer(BP_SNAPSHOT);
@@ -98,7 +98,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void shouldRejectNewCollapsibleValueWhenFull() {
+    public void shouldRejectNewKeysWhenFull() {
         buffer = createBuffer(2);
         buffer.offer(1L, BP_SNAPSHOT);
         buffer.offer(2L, VOD_SNAPSHOT_1);
@@ -108,7 +108,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void shouldAcceptUpdatedCollapsibleValueWhenFull() {
+    public void shouldAcceptExistingKeysWhenFull() {
         buffer = createBuffer(2);
         buffer.offer(1L, BP_SNAPSHOT);
         buffer.offer(2L, BP_SNAPSHOT);
@@ -118,58 +118,58 @@ public class FunctionalTest {
     }
 
     @Test
-    public void shouldReturnOneUpdate() {
-        addCollapsibleValue(BP_SNAPSHOT);
+    public void shouldReturnSingleValue() {
+        addKeyAndValue(BP_SNAPSHOT);
         assertContains(BP_SNAPSHOT);
     }
 
     @Test
-    public void shouldReturnTwoDifferentUpdates() {
-        addCollapsibleValue(BP_SNAPSHOT);
-        addCollapsibleValue(VOD_SNAPSHOT_1);
+    public void shouldReturnTwoValuesWithDifferentKeys() {
+        addKeyAndValue(BP_SNAPSHOT);
+        addKeyAndValue(VOD_SNAPSHOT_1);
 
         assertContains(BP_SNAPSHOT, VOD_SNAPSHOT_1);
     }
 
     @Test
-    public void shouldCollapseTwoCollapsibleUpdatesOnSameTopic() {
-        addCollapsibleValue(VOD_SNAPSHOT_1);
-        addCollapsibleValue(VOD_SNAPSHOT_2);
+    public void shouldUpdateValuesWithEqualKeys() {
+        addKeyAndValue(VOD_SNAPSHOT_1);
+        addKeyAndValue(VOD_SNAPSHOT_2);
 
         assertContains(VOD_SNAPSHOT_2);
     }
 
     @Test
-    public void shouldNotCollapseTwoNonCollapsibleUpdatesOnSameTopic() {
-        addNonCollapsibleValue(VOD_SNAPSHOT_1);
-        addNonCollapsibleValue(VOD_SNAPSHOT_2);
+    public void shouldNotUpdateValuesWithoutKeys() {
+        addValue(VOD_SNAPSHOT_1);
+        addValue(VOD_SNAPSHOT_2);
 
         assertContains(VOD_SNAPSHOT_1, VOD_SNAPSHOT_2);
     }
 
     @Test
-    public void shouldCollapseTwoUpdatesOnSameTopicAndPreserveOrdering() {
-        addCollapsibleValue(VOD_SNAPSHOT_1);
-        addCollapsibleValue(BP_SNAPSHOT);
-        addCollapsibleValue(VOD_SNAPSHOT_2);
+    public void shouldUpdateValuesWithEqualKeysAndPreserveOrdering() {
+        addKeyAndValue(VOD_SNAPSHOT_1);
+        addKeyAndValue(BP_SNAPSHOT);
+        addKeyAndValue(VOD_SNAPSHOT_2);
 
         assertContains(VOD_SNAPSHOT_2, BP_SNAPSHOT);
     }
 
     @Test
-    public void shouldNotCollapseValuesIfReadFastEnough() {
-        addCollapsibleValue(VOD_SNAPSHOT_1);
+    public void shouldNotUpdateValuesIfReadOccursBetweenValues() {
+        addKeyAndValue(VOD_SNAPSHOT_1);
         assertContains(VOD_SNAPSHOT_1);
 
-        addCollapsibleValue(VOD_SNAPSHOT_2);
+        addKeyAndValue(VOD_SNAPSHOT_2);
         assertContains(VOD_SNAPSHOT_2);
     }
 
     @Test
     public void shouldReturnOnlyTheMaximumNumberOfRequestedItems() {
-        addNonCollapsibleValue(BP_SNAPSHOT);
-        addNonCollapsibleValue(VOD_SNAPSHOT_1);
-        addNonCollapsibleValue(VOD_SNAPSHOT_2);
+        addValue(BP_SNAPSHOT);
+        addValue(VOD_SNAPSHOT_1);
+        addValue(VOD_SNAPSHOT_2);
 
         List<MarketSnapshot> snapshots = new ArrayList<MarketSnapshot>();
         assertEquals(2, buffer.poll(snapshots, 2));
@@ -187,9 +187,9 @@ public class FunctionalTest {
 
     @Test
     public void shouldReturnAllItemsWithoutRequestLimit() {
-        addNonCollapsibleValue(BP_SNAPSHOT);
-        addCollapsibleValue(VOD_SNAPSHOT_1);
-        addCollapsibleValue(VOD_SNAPSHOT_2);
+        addValue(BP_SNAPSHOT);
+        addKeyAndValue(VOD_SNAPSHOT_1);
+        addKeyAndValue(VOD_SNAPSHOT_2);
 
         List<MarketSnapshot> snapshots = new ArrayList<MarketSnapshot>();
         assertEquals(2, buffer.poll(snapshots));
@@ -232,11 +232,11 @@ public class FunctionalTest {
         assertEquals(1, buffer.size());
     }
 
-    private void addCollapsibleValue(MarketSnapshot snapshot) {
+    private void addKeyAndValue(MarketSnapshot snapshot) {
         assertTrue(buffer.offer(snapshot.getInstrumentId(), snapshot));
     }
 
-    private void addNonCollapsibleValue(MarketSnapshot snapshot) {
+    private void addValue(MarketSnapshot snapshot) {
         assertTrue(buffer.offer(snapshot));
     }
 
