@@ -47,13 +47,13 @@ public class CoalescingRingBufferViewer implements CoalescingRingBufferViewerMBe
     }
 
     @Override
-    public long getNextWrite() {
+    public long getProducerIndex() {
         return buffer.nextWrite();
     }
 
     @Override
-    public long getNextRead() {
-        return buffer.nextRead();
+    public long getConsumerIndex() {
+        return buffer.firstWrite();
     }
 
     public static void register(String bufferName, CoalescingRingBuffer<?, ?> buffer, MBeanServer mBeanServer) throws JMException {

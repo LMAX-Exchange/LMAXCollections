@@ -33,7 +33,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     private final int mask;
     private final int capacity;
 
-    private volatile long nextRead = 1; // the oldest slot that is is safe to write to
+    private volatile long firstWrite = 1; // the oldest slot that is is safe to write to
     private final AtomicLong lastRead = new AtomicLong(0); // the newest slot that it is safe to overwrite
 
     @SuppressWarnings("unchecked")
@@ -68,13 +68,13 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
         return nextWrite;
     }
 
-    public long nextRead() {
-        return nextRead;
+    public long firstWrite() {
+        return firstWrite;
     }
 
     @Override
     public boolean isEmpty() {
-        return nextRead == nextWrite;
+        return firstWrite == nextWrite;
     }
 
     @Override
@@ -86,13 +86,13 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     public boolean offer(K key, V value) {
         long nextWrite = this.nextWrite;
 
-        for (long readPosition = nextRead; readPosition < nextWrite; readPosition++) {
-            int index = mask(readPosition);
+        for (long updatePosition = firstWrite; updatePosition < nextWrite; updatePosition++) {
+            int index = mask(updatePosition);
 
             if(key.equals(keys[index])) {
                 values.set(index, value);
 
-                if (nextRead <= readPosition) {  // check that the reader has not read it yet
+                if (updatePosition >= firstWrite) {  // check that the reader has not read beyond our update point yet
                     return true;
                 } else {
                     break;
@@ -150,12 +150,12 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @Override
     public int poll(Collection<? super V> bucket, int maxItems) {
-        long claimUpTo = min(nextRead + maxItems, nextWrite);
+        long claimUpTo = min(firstWrite + maxItems, nextWrite);
         return fill(bucket, claimUpTo);
     }
 
     private int fill(Collection<? super V> bucket, long claimUpTo) {
-        nextRead = claimUpTo;
+        firstWrite = claimUpTo;
         long lastRead = this.lastRead.get();
 
         for (long readIndex = lastRead + 1; readIndex < claimUpTo; readIndex++) {

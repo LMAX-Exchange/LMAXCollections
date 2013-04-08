@@ -24,8 +24,8 @@ public interface CoalescingRingBufferViewerMBean {
 
     long getRejectionCount();
 
-    long getNextWrite();
+    long getProducerIndex();
 
-    long getNextRead();
+    long getConsumerIndex();
 
 }
