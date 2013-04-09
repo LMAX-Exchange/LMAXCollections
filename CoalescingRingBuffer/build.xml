@@ -86,10 +86,13 @@
     </target>
 
     <target name="run.performance.test" depends="compile.tests">
+        <exec command="sudo java -version"/>
+
         <exec command="sudo cpufreq-set -c 0 -f 1700000"/>
         <exec command="sudo cpufreq-set -c 1 -f 1700000"/>
         <exec command="sudo cpufreq-set -c 2 -f 1700000"/>
         <exec command="sudo cpufreq-set -c 3 -f 1700000"/>
+
         <exec command="sudo nice -n -20 taskset -c 1,3 java -XX:+PrintCompilation -XX:+PrintGC -server -XX:CompileThreshold=100000 -Xms1g -Xmx1g -cp build/test/automated/:build/test/manual/:build/jar/* com.lmax.collections.coalescing.ring.buffer.performance.PerformanceTest"/>
     </target>
 </project>
