@@ -13,6 +13,7 @@
 
     <modules>
         <module>CoalescingRingBuffer</module>
+        <module>CoalescingRingBuffer-samples</module>
     </modules>
 
     <properties>
