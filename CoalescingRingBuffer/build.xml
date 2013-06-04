@@ -22,7 +22,7 @@
 
     <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
-        <javac debug="on" destdir="build/classes" includeantruntime="false" srcdir="src"/>
+        <javac debug="on" destdir="build/classes" includeantruntime="false" srcdir="src/main/java"/>
     </target>
 
     <target name="jar" depends="compile">
@@ -38,7 +38,7 @@
 
     <target name="compile.automated.tests" depends="jar">
         <mkdir dir="build/test/automated"/>
-        <javac classpathref="automated.test.classpath" debug="on" destdir="build/test/automated" includeantruntime="false" srcdir="test/automated"/>
+        <javac classpathref="automated.test.classpath" debug="on" destdir="build/test/automated" includeantruntime="false" srcdir="src/test/java"/>
     </target>
 
     <path id="manual.test.classpath">
@@ -62,7 +62,7 @@
                 <path location="build/test/automated"/>
             </classpath>
             <batchtest fork="yes" todir="build/testResults">
-                <fileset dir="test/automated" includes="**/*Test.java"/>
+                <fileset dir="src/test/java" includes="**/*Test.java"/>
             </batchtest>
         </junit>
     </target>
