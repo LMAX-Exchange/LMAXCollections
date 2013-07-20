@@ -16,7 +16,8 @@ Please see http://nickzeeb.wordpress.com/2013/03/07/the-coalescing-ring-buffer/ 
 
 Ports:
 ==========
-.Net https://github.com/ncornwell/NCoalescingRingBuffer
+* .Net https://github.com/ncornwell/NCoalescingRingBuffer
+* Python https://github.com/jstasiak/coalringbuf
 
 Changelog
 ==========
