@@ -6,12 +6,11 @@
     <parent>
         <groupId>com.lmax.collections</groupId>
         <artifactId>collections-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>coalescingringbuffer-samples</artifactId>
-    <version>1.0.0</version>
     <description>Samples of using CoalescingRingBuffer</description>
     <url>https://github.com/LMAX-Exchange/LMAXCollections/CoalescingRingBuffer-samples</url>
 
@@ -19,7 +18,7 @@
         <dependency>
             <groupId>com.lmax.collections</groupId>
             <artifactId>coalescingringbuffer</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
     </dependencies>
 
