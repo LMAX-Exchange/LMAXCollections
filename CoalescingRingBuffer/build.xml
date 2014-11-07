@@ -22,13 +22,13 @@
 
     <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
-        <javac debug="on" destdir="build/classes" includeantruntime="false" srcdir="src/main/java"/>
+        <javac debug="on" destdir="build/classes" includeantruntime="false" srcdir="src/main/java" source="${javaVersion}" target="${javaVersion}"/>
     </target>
 
     <target name="jar" depends="compile">
         <mkdir dir="build/jar"/>
-        <jar basedir="build/classes" destfile="build/jar/coalescingRingBuffer-${version}.jar"/>
-        <zip destfile="build/jar/coalescingRingBuffer-${version}-src.zip" basedir="." excludes="build/**"/>
+        <jar basedir="build/classes" destfile="build/jar/coalescingRingBuffer-${buildVersion}.jar"/>
+        <zip destfile="build/jar/coalescingRingBuffer-${buildVersion}-src.zip" basedir="." excludes="build/**"/>
     </target>
 
     <path id="automated.test.classpath">
@@ -38,7 +38,7 @@
 
     <target name="compile.automated.tests" depends="jar">
         <mkdir dir="build/test/automated"/>
-        <javac classpathref="automated.test.classpath" debug="on" destdir="build/test/automated" includeantruntime="false" srcdir="src/test/java"/>
+        <javac classpathref="automated.test.classpath" debug="on" destdir="build/test/automated" includeantruntime="false" srcdir="src/test/java" source="${javaVersion}" target="${javaVersion}"/>
     </target>
 
     <path id="manual.test.classpath">
@@ -48,7 +48,7 @@
 
     <target name="compile.manual.tests" depends="jar">
         <mkdir dir="build/test/manual"/>
-        <javac classpathref="manual.test.classpath" debug="on" destdir="build/test/manual" includeantruntime="false" srcdir="test/manual"/>
+        <javac classpathref="manual.test.classpath" debug="on" destdir="build/test/manual" includeantruntime="false" srcdir="test/manual" source="${javaVersion}" target="${javaVersion}"/>
     </target>
 
     <target name="compile.tests" depends="compile.automated.tests, compile.manual.tests"/>

@@ -32,3 +32,10 @@ Changelog
     - 4% performance improvement by using lazy sets where possible
     - constructor now rounds up capacity to the nearest higher power of two instead of throwing an exception
     - nextRead index has been renamed firstWrite for clarity
+
+## 1.1.3 Released (7-Nov-2014)
+
+- Coalescing Ring Buffer improvements:
+    - improve size method to return a consistent result when reading two volatiles
+    - see http://psy-lob-saw.blogspot.co.uk/2014/07/concurrent-bugs-size-matters.html for details
+    - thanks to Stanimir Simeonoff, Nitsan Wakart and Martin Thompson!

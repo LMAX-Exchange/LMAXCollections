@@ -52,7 +52,17 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @Override
     public int size() {
-        return (int) (nextWrite - lastRead.get() - 1);
+
+        // loop until you get a consistent read of both volatile indices
+        while (true) {
+            long lastReadBefore     = lastRead.get();
+            long currentNextWrite   = this.nextWrite;
+            long lastReadAfter      = lastRead.get();
+
+            if (lastReadBefore == lastReadAfter) {
+                return (int) (currentNextWrite - lastReadBefore) - 1;
+            }
+        }
     }
 
     @Override
