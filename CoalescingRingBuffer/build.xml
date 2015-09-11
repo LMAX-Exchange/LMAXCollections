@@ -48,7 +48,7 @@
 
     <target name="compile.manual.tests" depends="jar">
         <mkdir dir="build/test/manual"/>
-        <javac classpathref="manual.test.classpath" debug="on" destdir="build/test/manual" includeantruntime="false" srcdir="test/manual" source="${javaVersion}" target="${javaVersion}"/>
+        <javac classpathref="manual.test.classpath" debug="on" destdir="build/test/manual" includeantruntime="false" srcdir="src/manual-test/java" source="${javaVersion}" target="${javaVersion}"/>
     </target>
 
     <target name="compile.tests" depends="compile.automated.tests, compile.manual.tests"/>
