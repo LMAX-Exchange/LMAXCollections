@@ -222,12 +222,23 @@ public class FunctionalTest {
         assertEquals(2, buffer.rejectionCount());
     }
 
+    @SuppressWarnings("RedundantStringConstructorCall")
     @Test
     public void shouldUseObjectEqualityToCompareKeys() throws Exception {
         CoalescingRingBuffer<String, Object> buffer = new CoalescingRingBuffer<String, Object>(2);
 
         buffer.offer(new String("boo"), new Object());
         buffer.offer(new String("boo"), new Object());
+
+        assertEquals(1, buffer.size());
+    }
+
+    @Test
+    public void shouldAllowNullKeys() throws Exception {
+        CoalescingRingBuffer<Object, Object> buffer = new CoalescingRingBuffer<Object, Object>(2);
+
+        buffer.offer(null, new Object());
+        buffer.offer(null, new Object());
 
         assertEquals(1, buffer.size());
     }
