@@ -85,7 +85,7 @@
         </copy>
     </target>
 
-    <target name="run.performance.test" depends="compile.tests">
+    <target name="run.performance.test" depends="report.test.failures">
         <exec command="sudo java -version"/>
 
         <exec command="sudo cpufreq-set -c 0 -f 1700000"/>
