@@ -42,7 +42,6 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
         this.capacity = nextPowerOfTwo(capacity);
         this.mask = this.capacity - 1;
 
-
         this.keys = (K[]) new Object[this.capacity];
         this.values = new AtomicReferenceArray<V>(this.capacity);
     }
