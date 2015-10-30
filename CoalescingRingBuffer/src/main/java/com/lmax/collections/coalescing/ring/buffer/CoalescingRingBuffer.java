@@ -22,7 +22,7 @@ import static java.lang.Math.min;
 
 public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> {
 
-    private volatile long nextWrite = 1; // the next write index
+    private final AtomicLong nextWrite = new AtomicLong(1); // the next write index
     private long lastCleaned = 0; // the last index that was nulled out by the producer
     private final AtomicLong rejectionCount = new AtomicLong(0);
     private final K[] keys;
@@ -55,7 +55,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
         // loop until you get a consistent read of both volatile indices
         while (true) {
             long lastReadBefore     = lastRead.get();
-            long currentNextWrite   = this.nextWrite;
+            long currentNextWrite   = this.nextWrite.get();
             long lastReadAfter      = lastRead.get();
 
             if (lastReadBefore == lastReadAfter) {
@@ -74,7 +74,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     }
 
     public long nextWrite() {
-        return nextWrite;
+        return nextWrite.get();
     }
 
     public long firstWrite() {
@@ -83,7 +83,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @Override
     public boolean isEmpty() {
-        return firstWrite == nextWrite;
+        return firstWrite == nextWrite.get();
     }
 
     @Override
@@ -93,7 +93,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
 
     @Override
     public boolean offer(K key, V value) {
-        long nextWrite = this.nextWrite;
+        long nextWrite = this.nextWrite.get();
 
         for (long updatePosition = firstWrite; updatePosition < nextWrite; updatePosition++) {
             int index = mask(updatePosition);
@@ -143,23 +143,23 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
     }
 
     private void store(K key, V value) {
-        long nextWrite = this.nextWrite;
+        long nextWrite = this.nextWrite.get();
         int index = mask(nextWrite);
 
         keys[index] = key;
         values.set(index, value);
 
-        this.nextWrite = nextWrite + 1;
+        this.nextWrite.lazySet(nextWrite + 1);
     }
 
     @Override
     public int poll(Collection<? super V> bucket) {
-        return fill(bucket, nextWrite);
+        return fill(bucket, nextWrite.get());
     }
 
     @Override
     public int poll(Collection<? super V> bucket, int maxItems) {
-        long claimUpTo = min(firstWrite + maxItems, nextWrite);
+        long claimUpTo = min(firstWrite + maxItems, nextWrite.get());
         return fill(bucket, claimUpTo);
     }
 
