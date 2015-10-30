@@ -233,16 +233,6 @@ public class FunctionalTest {
         assertEquals(1, buffer.size());
     }
 
-    @Test
-    public void shouldAllowNullKeys() throws Exception {
-        CoalescingRingBuffer<Object, Object> buffer = new CoalescingRingBuffer<Object, Object>(2);
-
-        buffer.offer(null, new Object());
-        buffer.offer(null, new Object());
-
-        assertEquals(1, buffer.size());
-    }
-
     private void addKeyAndValue(MarketSnapshot snapshot) {
         assertTrue(buffer.offer(snapshot.getInstrumentId(), snapshot));
     }

@@ -15,7 +15,6 @@
 package com.lmax.collections.coalescing.ring.buffer;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
@@ -99,7 +98,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
         for (long updatePosition = firstWrite; updatePosition < nextWrite; updatePosition++) {
             int index = mask(updatePosition);
 
-            if(Objects.equals(key, keys[index])) {
+            if(key.equals(keys[index])) {
                 values.set(index, value);
 
                 if (updatePosition >= firstWrite) {  // check that the reader has not read beyond our update point yet
