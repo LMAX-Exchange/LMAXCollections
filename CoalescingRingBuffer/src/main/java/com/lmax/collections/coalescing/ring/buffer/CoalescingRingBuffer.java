@@ -170,6 +170,7 @@ public final class CoalescingRingBuffer<K, V> implements CoalescingBuffer<K, V> 
         for (long readIndex = lastRead + 1; readIndex < claimUpTo; readIndex++) {
             int index = mask(readIndex);
             bucket.add(values.get(index));
+            values.set(index, null);
         }
 
         this.lastRead.lazySet(claimUpTo - 1);
