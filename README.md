@@ -39,3 +39,8 @@ Changelog
     - improve size method to return a consistent result when reading two volatiles
     - see http://psy-lob-saw.blogspot.co.uk/2014/07/concurrent-bugs-size-matters.html for details
     - thanks to Stanimir Simeonoff, Nitsan Wakart and Martin Thompson!
+
+## 1.1.3 Released (5-Jul-2017)
+
+- Coalescing Ring Buffer improvements:
+    - Null out entries in the ring buffer once consumed
